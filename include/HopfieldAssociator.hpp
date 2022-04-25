@@ -5,6 +5,8 @@
 
 class HopfieldAssociator{
     private:
+        bool isSeeded;
+        int seed;
         unsigned patternSize;
         unsigned storageSize;
         std::vector<std::vector<int>> weights;
@@ -15,6 +17,9 @@ class HopfieldAssociator{
 
         unsigned getPatternSize();
         unsigned getStorageSize();
+        int getSeed();
+        bool usesSeed();
+        void setSeed(int seed);
 };
 
 #endif

@@ -28,11 +28,11 @@ std::vector<int> HopfieldAssociator::associate(std::vector<int> pattern, unsigne
     std::random_device                  device;
     std::mt19937                        generator(device());
     std::uniform_int_distribution<int>  distribution(0, patternSize-1);
+    if(isSeeded) generator.seed(seed);
     for(unsigned iter = 0; iter < iterations; iter++){
         int x = 0;
         int i = distribution(generator);
         for(int j = 0; j < patternSize; j++){
-            //printf("%i\n", i);
             x += weights[i][j]*pattern[j];
         }
         pattern[i] = x < 0 ? -1 : 1;
@@ -46,4 +46,17 @@ unsigned HopfieldAssociator::getPatternSize(){
 
 unsigned HopfieldAssociator::getStorageSize(){
     return storageSize;
+}
+
+int HopfieldAssociator::getSeed(){
+    return seed;
+}
+
+bool HopfieldAssociator::usesSeed(){
+    return isSeeded;
+}
+
+void HopfieldAssociator::setSeed(int seed){
+    this->seed = seed;
+    isSeeded = true;
 }
