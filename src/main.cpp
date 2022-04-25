@@ -2,6 +2,16 @@
 #include <vector>
 #include "HopfieldAssociator.hpp"
 
+
+void printPattern(std::vector<int> pattern, int rows, int cols){
+    for(int i = 0; i < rows; i++){
+        for(int j = 0; j < cols; j++){
+            printf(pattern[i*rows+j] == 1 ? "#" : "_");
+        }
+        printf("\n");
+    }
+}
+
 int main()
 {
     std::vector<std::vector<int>> patterns = {
@@ -59,14 +69,17 @@ int main()
     };
 
     HopfieldAssociator ha(patterns);
+    printf("----------------\n");
     printf("Storage size: %i\n",ha.getStorageSize());
     printf("Pattern size: %i\n", ha.getPatternSize());
+    printf("----------------\n");
     for(auto pattern : noised){
-        pattern = ha.associate(pattern, 100);
-        for(auto var : pattern){
-            printf("%i,", var);
-        }
-        printf("\n");
+        printf("From:\n");
+        printPattern(pattern,5,5);
+        pattern = ha.associate(pattern, 50);
+        printf("\nTo:\n");
+        printPattern(pattern,5,5);
+        printf("\n\n\n");
     }
     return 0;
 }
