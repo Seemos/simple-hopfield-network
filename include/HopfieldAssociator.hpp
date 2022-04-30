@@ -12,13 +12,13 @@ class HopfieldAssociator{
         std::vector<std::vector<int>> weights;
 
     public:
-        HopfieldAssociator(std::vector<std::vector<int>> patterns);
-        std::vector<int> associate(std::vector<int> pattern, unsigned iterations);
+        HopfieldAssociator(const std::vector<std::vector<int>> &patterns);
+        std::vector<int> associate(std::vector<int> &pattern, unsigned iterations);
 
-        unsigned getPatternSize();
-        unsigned getStorageSize();
-        int getSeed();
-        bool usesSeed();
+        unsigned getPatternSize() const;
+        unsigned getStorageSize() const;
+        int getSeed() const;
+        bool usesSeed() const;
         void setSeed(int seed);
 };
 

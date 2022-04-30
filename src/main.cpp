@@ -3,7 +3,7 @@
 #include "HopfieldAssociator.hpp"
 
 
-void printPattern(std::vector<int> pattern, unsigned rows, unsigned cols){
+void printPattern(const std::vector<int> &pattern, unsigned rows, unsigned cols){
     for(unsigned i = 0; i < rows; i++){
         for(unsigned j = 0; j < cols; j++){
             printf(pattern[i*rows+j] == 1 ? "#" : "_");
@@ -78,12 +78,12 @@ int main()
     printf("Seed: %i\n", ha.getSeed());
     printf("----------------\n");
 
-    for(auto pattern : noised){
+    for(auto &pattern : noised){
         printf("From:\n");
         printPattern(pattern,5,5);
-        pattern = ha.associate(pattern, 100);
+        const auto associated = ha.associate(pattern, 100);
         printf("\nTo:\n");
-        printPattern(pattern,5,5);
+        printPattern(associated,5,5);
         printf("\n\n\n");
     }
     return 0;

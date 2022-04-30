@@ -2,7 +2,7 @@
 #include <random>
 #include "HopfieldAssociator.hpp"
 
-HopfieldAssociator::HopfieldAssociator(std::vector<std::vector<int>> patterns){
+HopfieldAssociator::HopfieldAssociator(const std::vector<std::vector<int>> &patterns){
     // general setup
     storageSize = patterns.size();
     patternSize = patterns[0].size();
@@ -24,7 +24,7 @@ HopfieldAssociator::HopfieldAssociator(std::vector<std::vector<int>> patterns){
     }
 }
 
-std::vector<int> HopfieldAssociator::associate(std::vector<int> pattern, unsigned iterations){
+std::vector<int> HopfieldAssociator::associate(std::vector<int> &pattern, unsigned iterations){
     std::random_device                  device;
     std::mt19937                        generator(device());
     std::uniform_int_distribution<int>  distribution(0, patternSize-1);
@@ -40,19 +40,19 @@ std::vector<int> HopfieldAssociator::associate(std::vector<int> pattern, unsigne
     return pattern;
 }
 
-unsigned HopfieldAssociator::getPatternSize(){
+unsigned HopfieldAssociator::getPatternSize() const{
     return patternSize;
 }
 
-unsigned HopfieldAssociator::getStorageSize(){
+unsigned HopfieldAssociator::getStorageSize() const{
     return storageSize;
 }
 
-int HopfieldAssociator::getSeed(){
+int HopfieldAssociator::getSeed() const{
     return seed;
 }
 
-bool HopfieldAssociator::usesSeed(){
+bool HopfieldAssociator::usesSeed() const{
     return isSeeded;
 }
 
