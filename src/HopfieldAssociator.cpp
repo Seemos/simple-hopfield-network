@@ -12,10 +12,10 @@ HopfieldAssociator::HopfieldAssociator(std::vector<std::vector<int>> patterns){
     }
 
     // weightcalculation
-    for(int i = 0; i < patternSize; i++){
-        for(int j = i+1; j < patternSize; j++){
+    for(unsigned i = 0; i < patternSize; i++){
+        for(unsigned j = i+1; j < patternSize; j++){
             int w = 0;
-            for(int k = 0; k < storageSize; k++){
+            for(unsigned k = 0; k < storageSize; k++){
                 w += patterns[k][i]*patterns[k][j];
             }
             weights[i][j] = w;
@@ -32,7 +32,7 @@ std::vector<int> HopfieldAssociator::associate(std::vector<int> pattern, unsigne
     for(unsigned iter = 0; iter < iterations; iter++){
         int x = 0;
         int i = distribution(generator);
-        for(int j = 0; j < patternSize; j++){
+        for(unsigned j = 0; j < patternSize; j++){
             x += weights[i][j]*pattern[j];
         }
         pattern[i] = x < 0 ? -1 : 1;

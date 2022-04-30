@@ -3,9 +3,9 @@
 #include "HopfieldAssociator.hpp"
 
 
-void printPattern(std::vector<int> pattern, int rows, int cols){
-    for(int i = 0; i < rows; i++){
-        for(int j = 0; j < cols; j++){
+void printPattern(std::vector<int> pattern, unsigned rows, unsigned cols){
+    for(unsigned i = 0; i < rows; i++){
+        for(unsigned j = 0; j < cols; j++){
             printf(pattern[i*rows+j] == 1 ? "#" : "_");
         }
         printf("\n");
