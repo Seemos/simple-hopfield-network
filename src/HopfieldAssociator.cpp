@@ -1,5 +1,6 @@
 #include <vector>
 #include <random>
+#include <bits/stdc++.h>
 #include "HopfieldAssociator.hpp"
 
 HopfieldAssociator::HopfieldAssociator(const std::vector<std::vector<int>> &patterns){
@@ -27,16 +28,29 @@ HopfieldAssociator::HopfieldAssociator(const std::vector<std::vector<int>> &patt
 std::vector<int> HopfieldAssociator::associate(std::vector<int> &pattern, unsigned iterations){
     std::random_device                  device;
     std::mt19937                        generator(device());
-    std::uniform_int_distribution<int>  distribution(0, patternSize-1);
-    if(isSeeded) generator.seed(seed);
-    for(unsigned iter = 0; iter < iterations; iter++){
-        int x = 0;
-        int i = distribution(generator);
-        for(unsigned j = 0; j < patternSize; j++){
-            x += weights[i][j]*pattern[j];
-        }
-        pattern[i] = x < 0 ? -1 : 1;
+    bool wasUpdated;
+    int indices[patternSize];
+    for(int i = 0; i < patternSize; i++){
+        indices[i] = i;
     }
+
+    if(isSeeded) generator.seed(seed);
+    do{
+        wasUpdated = false;
+        std::shuffle(indices, indices+patternSize, generator);
+        for(int k = 0; k < patternSize; k++){
+            int x = 0;
+            int i = indices[k];
+            for(unsigned j = 0; j < patternSize; j++){
+                x += weights[i][j]*pattern[j];
+            }
+            x = x < 0 ? -1 : 1;
+            if(pattern[i] != x){
+                pattern[i] = x;
+                wasUpdated = true;
+            }
+        }
+    }while (wasUpdated);
     return pattern;
 }
 
