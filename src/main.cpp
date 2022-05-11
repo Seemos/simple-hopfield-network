@@ -69,14 +69,15 @@ int main()
     };
 
     HopfieldAssociator ha(patterns);
-    ha.setSeed(99);
+    ha.setSeed(42);
 
-    printf("----------------\n");
+    printf("-------------------\n");
     printf("Storage size: %i\n",ha.getStorageSize());
     printf("Pattern size: %i\n", ha.getPatternSize());
+    printf("Threshold: %lf\n", ha.getThreshold());
     printf("Uses Seed: %s\n", ha.usesSeed() ? "true" : "false");
     printf("Seed: %i\n", ha.getSeed());
-    printf("----------------\n");
+    printf("-------------------\n");
 
     for(auto &pattern : noised){
         printf("From:\n");

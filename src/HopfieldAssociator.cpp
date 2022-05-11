@@ -3,8 +3,9 @@
 #include <bits/stdc++.h>
 #include "HopfieldAssociator.hpp"
 
-HopfieldAssociator::HopfieldAssociator(const std::vector<std::vector<int>> &patterns){
+HopfieldAssociator::HopfieldAssociator(const std::vector<std::vector<int>> &patterns, double threshold){
     // general setup
+    this->threshold = threshold;
     storageSize = patterns.size();
     patternSize = patterns[0].size();
     weights.resize(patternSize);
@@ -39,12 +40,12 @@ std::vector<int> HopfieldAssociator::associate(std::vector<int> &pattern){
         wasUpdated = false;
         std::shuffle(indices, indices+patternSize, generator);
         for(int k = 0; k < patternSize; k++){
-            int x = 0;
+            double x = 0;
             int i = indices[k];
             for(unsigned j = 0; j < patternSize; j++){
                 x += weights[i][j]*pattern[j];
             }
-            x = x < 0 ? -1 : 1;
+            x = (x/storageSize) < threshold ? -1 : 1;
             if(pattern[i] != x){
                 pattern[i] = x;
                 wasUpdated = true;
@@ -60,6 +61,10 @@ unsigned HopfieldAssociator::getPatternSize() const{
 
 unsigned HopfieldAssociator::getStorageSize() const{
     return storageSize;
+}
+
+double HopfieldAssociator::getThreshold() const{
+    return threshold;
 }
 
 int HopfieldAssociator::getSeed() const{
