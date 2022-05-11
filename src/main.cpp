@@ -81,7 +81,7 @@ int main()
     for(auto &pattern : noised){
         printf("From:\n");
         printPattern(pattern,5,5);
-        const auto associated = ha.associate(pattern, 100);
+        const auto associated = ha.associate(pattern);
         printf("\nTo:\n");
         printPattern(associated,5,5);
         printf("\n\n\n");

@@ -13,7 +13,7 @@ class HopfieldAssociator{
 
     public:
         HopfieldAssociator(const std::vector<std::vector<int>> &patterns);
-        std::vector<int> associate(std::vector<int> &pattern, unsigned iterations);
+        std::vector<int> associate(std::vector<int> &pattern);
 
         unsigned getPatternSize() const;
         unsigned getStorageSize() const;

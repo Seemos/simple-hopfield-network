@@ -25,7 +25,7 @@ HopfieldAssociator::HopfieldAssociator(const std::vector<std::vector<int>> &patt
     }
 }
 
-std::vector<int> HopfieldAssociator::associate(std::vector<int> &pattern, unsigned iterations){
+std::vector<int> HopfieldAssociator::associate(std::vector<int> &pattern){
     std::random_device                  device;
     std::mt19937                        generator(device());
     bool wasUpdated;
